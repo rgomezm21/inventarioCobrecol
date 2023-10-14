@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const urlUpdate = 'https://crudnode-production.up.railway.app/api/users/update'
 
-const EditProducts = () => {
+export const EditProducts = () => {
     const [producto, setProducto] = useState('');
     const [cliente, setCliente] = useState('');
     const [cantidad, setCantidad] = useState('');
@@ -49,9 +49,6 @@ const EditProducts = () => {
 
     return (
         <div className='container-fluid'>
-            <nav class="navbar flex-column bg-success border-bottom border-body" data-bs-theme="dark" >
-                <a class="navbar-brand" href="/">Volver a Inicio</a>
-            </nav>
             <div className='row mt-3'>
                 <div className='col-8 col-lg8 offset-0 offset-lg-2'>
                     <div className='card text-center mt-1'>
@@ -78,8 +75,8 @@ const EditProducts = () => {
                                 className='form-control mb-2'
                                 required={true} value={valor_pagado} onChange={(e) => setValor_pagado(e.target.value)}>
                             </input>
-                            <span className='input-group-text mb-1'><i className='fa-solid fa-calendar-days'></i>Usar el formato (AAAA-MM-DD)</span>
-                            <input type='text' id='dateBuy'
+                            <span className='input-group-text mb-1'><i className='fa-solid fa-calendar-days'></i>Fecha Compra</span>
+                            <input type='date' id='dateBuy'
                                 className='form-control mb-2'
                                 required={true} value={fecha_compra} onChange={(e) => setFecha_compra(e.target.value)}>
                             </input>
@@ -92,4 +89,4 @@ const EditProducts = () => {
     )
 }
 
-export default EditProducts
+export default EditProducts;

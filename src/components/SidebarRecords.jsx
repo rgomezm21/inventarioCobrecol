@@ -2,8 +2,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import logo from '../assets/CobrecoIMG.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../store/auth/thunks';
 
 export const Sidebar = () => {
+    const dispatch = useDispatch();
+    const onLogout = () =>{
+        dispatch(startLogout());
+    }
     return (
         <>
             <div
@@ -33,17 +39,25 @@ export const Sidebar = () => {
                             <svg className="bi pe-none me-2" width={16} height={16}>
                                 <use xlinkHref="#people-circle" />
                             </svg>
-                            Añadir Registro
+                            <i class="bi bi-cart-plus me-2"></i>
+                            Añadir Compra
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inform" className="nav-link text-white">
+                            <svg className="bi pe-none me-2" width={16} height={16}>
+                                <use xlinkHref="#people-circle" />
+                            </svg>
+                            <i class="bi bi-clipboard-data me-2"></i>
+                            Informe Mensual
                         </a>
                     </li>
                 </ul>
                 <hr />
-                <div className="link">
-                    <a
-                        href="#"
-                        className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                <div className="link" onClick={onLogout}>
+                    <a 
+                    href="#"
+                    className="d-flex align-items-center text-white text-decoration-none"
                     >
                         <img
                             src={logo}

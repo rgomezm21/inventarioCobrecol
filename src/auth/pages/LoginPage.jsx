@@ -1,19 +1,18 @@
 import { useDispatch } from 'react-redux';
 import Logo from '../../assets/CobrecoIMG.png'
+import { startLogin } from '../../store/auth/thunks';
 import { useForm } from '../../hooks';
-import { checkingAuthentication } from '../../store/auth/thunks';
 
 export const LoginPage = () => {
 
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm({
-    email: 'rgomezm21@gmail.com',
-    password: '12345'
-  })
+    email: '',
+    password: ''
+  })  
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({ email, password });
-    dispatch(checkingAuthentication);
+    dispatch(startLogin({email, password}));
   }
 
 
@@ -57,7 +56,7 @@ export const LoginPage = () => {
               Iniciar sesión
             </button>
             <p className="mt-5 mb-3 text-body-secondary text-center">
-              &copy; 2017–2023
+              &copy; Rgomezm21 2023
             </p>
           </form>
         </div>

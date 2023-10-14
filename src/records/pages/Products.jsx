@@ -1,7 +1,7 @@
 import ShowProducts from "../../components/ShowProducts";
 import { Sidebar } from "../../components/SidebarRecords";
 
-export const RecordsPage = () => {
+export const Products = () => {
   return (
     <div className="container-fluid" style={{paddingLeft:'2px'}}>
       <div className="row">

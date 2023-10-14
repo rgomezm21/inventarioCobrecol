@@ -108,7 +108,7 @@ function ShowProducts() {
               type="search"
               placeholder="Search"
               aria-label="Search"
-              style={{width:"426px"}}
+              style={{ width: "426px" }}
             />
             <button className="btn btn-outline-success bg-light" type="submit">
               Buscar
@@ -127,7 +127,7 @@ function ShowProducts() {
                   <th>cliente</th>
                   <th>cantidad (KG)</th>
                   <th>Valor pagado</th>
-                  <th>Fecha Compra (AAAA/MM/DD)</th>
+                  <th>Fecha Compra</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -142,11 +142,11 @@ function ShowProducts() {
                     <td>{product.fecha_compra}</td>
                     <td>
                       <Link to={`/edit/${product.id}`} className="btn btn-warning">
-                        Editar
+                        <i class="bi bi-pencil-square"></i>
                       </Link>
                       &nbsp;
                       <button className="btn btn-danger" onClick={() => deleteProduct(product.id)}>
-                        Eliminar
+                        <i class="bi bi-trash"></i>
                       </button>
                     </td>
                   </tr>
