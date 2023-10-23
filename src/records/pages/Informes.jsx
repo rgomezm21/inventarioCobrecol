@@ -5,10 +5,10 @@ export const Informes = () => {
   return (
     <div>
         <div className='row'>   
-                <div className='col-5'>
+                <div className='col-3'>
                     <Sidebar/>
                 </div>
-                <div className='col-7'>
+                <div className='col-9'>
                     <InforMensual/>
                 </div>
         </div>
