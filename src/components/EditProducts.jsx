@@ -41,7 +41,7 @@ export const EditProducts = () => {
                 valor_pagado: valor_pagado,
                 fecha_compra: fecha_compra
             });
-            redirect('/'); // Redirige al usuario a la página principal después de la actualización exitosa
+            redirect('/');
         } catch (error) {
             console.error('Error al actualizar el producto:', error);
         }

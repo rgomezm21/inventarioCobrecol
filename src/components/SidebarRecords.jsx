@@ -14,7 +14,7 @@ export const Sidebar = () => {
         <>
             <div
                 className="d-flex flex-column flex-shrink-0 p-3 text-bg-success"
-                style={{ width: 280, height: '100vh' }}
+                style={{ width: 270, height: '100vh' }}
             >
                 <a
                     href="/"
@@ -34,7 +34,7 @@ export const Sidebar = () => {
                 </a>
                 <hr />
                 <ul className="nav nav-pills flex-column mb-auto">
-                    <li>
+                    <li style={{fontSize:'18px'}}>
                         <a href="/create" className="nav-link text-white">
                             <svg className="bi pe-none me-2" width={16} height={16}>
                                 <use xlinkHref="#people-circle" />
@@ -43,7 +43,7 @@ export const Sidebar = () => {
                             Añadir Compra
                         </a>
                     </li>
-                    <li>
+                    <li style={{fontSize:'18px'}}>
                         <a href="/inform" className="nav-link text-white">
                             <svg className="bi pe-none me-2" width={16} height={16}>
                                 <use xlinkHref="#people-circle" />
@@ -66,7 +66,7 @@ export const Sidebar = () => {
                             height={32}
                             className="rounded-circle me-2"
                         />
-                        <strong>Cerrar sesión</strong>
+                        <strong style={{fontSize:'18px'}}>Cerrar sesión</strong>
                     </a>
                 </div>
             </div>

@@ -3,17 +3,21 @@ import { Form, Button, Container, Row, Col, Table } from 'react-bootstrap';
 import Chart from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const InforMensual = () => {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalAmountPaid, setTotalAmountPaid] = useState(0);
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  }, [selectedDate]);
 
   const handleSearch = async () => {
     try {
@@ -21,7 +25,8 @@ export const InforMensual = () => {
       const searchData = response.data;
 
       setData(searchData);
-      const monthlySummary = calculateMonthlySummary(searchData, selectedMonth);
+      // Filtra los datos por mes y año seleccionados
+      const monthlySummary = calculateMonthlySummary(searchData, selectedDate);
       setTotalQuantity(monthlySummary.totalQuantity);
       setTotalAmountPaid(monthlySummary.totalAmountPaid);
     } catch (error) {
@@ -29,34 +34,25 @@ export const InforMensual = () => {
     }
   };
 
-  const calculateMonthlySummary = (data, month) => {
+  const calculateMonthlySummary = (data, date) => {
+    if (!date) {
+      return { totalQuantity: 0, totalAmountPaid: 0 };
+    }
+
+    const selectedMonth = date.getMonth() + 1;
+    const selectedYear = date.getFullYear();
+
     const filteredData = data.filter((item) => {
       const itemDate = new Date(item.fecha_compra);
-      return itemDate.getMonth() === month - 1;
+      return (
+        itemDate.getMonth() + 1 === selectedMonth && itemDate.getFullYear() === selectedYear
+      );
     });
 
     const totalQuantity = filteredData.reduce((total, item) => total + item.cantidad, 0);
     const totalAmountPaid = filteredData.reduce((total, item) => total + item.valor_pagado, 0);
 
     return { totalQuantity, totalAmountPaid };
-  };
-
-  const getMonthName = (monthNumber) => {
-    const months = [
-      'Enero',
-      'Febrero',
-      'Marzo',
-      'Abril',
-      'Mayo',
-      'Junio',
-      'Julio',
-      'Agosto',
-      'Septiembre',
-      'Octubre',
-      'Noviembre',
-      'Diciembre',
-    ];
-    return months[parseInt(monthNumber) - 1];
   };
 
   return (
@@ -73,25 +69,14 @@ export const InforMensual = () => {
             />
           </Col>
           <Col>
-            <Form.Control
-              as="select"
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-            >
-              <option value="">Seleccionar mes</option>
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
-              <option value="6">Junio</option>
-              <option value="7">Julio</option>
-              <option value="8">Agosto</option>
-              <option value="9">Septiembre</option>
-              <option value="10">Octubre</option>
-              <option value="11">Noviembre</option>
-              <option value="12">Diciembre</option>
-            </Form.Control>
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              showMonthYearPicker
+              dateFormat="MM/yyyy"
+              className="form-control"
+              placeholderText='Mes/Año'
+            />
           </Col>
           <Col>
             <Button variant="primary" onClick={handleSearch}>
@@ -115,12 +100,12 @@ export const InforMensual = () => {
               <tr>
                 <td>{totalQuantity}</td>
                 <td>{totalAmountPaid}</td>
-                <td>{getMonthName(selectedMonth)}</td>
+                <td>{selectedDate ? selectedDate.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }) : 'N/A'}</td>
               </tr>
             </tbody>
           </Table>
         </Col>
-        <hr/>
+        <hr />
         <Col md={8}>
           <Bar
             data={{
@@ -147,6 +132,6 @@ export const InforMensual = () => {
       </Row>
     </Container>
   );
-}
+};
 
 export default InforMensual;
