@@ -2,9 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## para iniciar sesion email y contraseña son:
-admin@gmail.com
-c: admin2023
+## para iniciar sesion email
 
 ## Available Scripts
 
